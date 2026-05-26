@@ -124,7 +124,7 @@ async function main() {
 
   // Create students
   const studentData = [
-    { email: 'student1@sfek.edu.kz', firstName: 'Айдар', lastName: 'Мусин', sid: 'S2024001', group: 0 },
+    { email: 'student1@sfek.edu.kz', firstName: 'Бекжан', lastName: 'Акылбеков', sid: 'S2024001', group: 0 },
     { email: 'student2@sfek.edu.kz', firstName: 'Камила', lastName: 'Нуртаева', sid: 'S2024002', group: 0 },
     { email: 'student3@sfek.edu.kz', firstName: 'Бахыт', lastName: 'Сериков', sid: 'S2024003', group: 1 },
     { email: 'student4@sfek.edu.kz', firstName: 'Дана', lastName: 'Алимова', sid: 'S2024004', group: 2 },
