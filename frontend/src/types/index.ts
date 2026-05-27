@@ -211,18 +211,20 @@ export interface ConflictResult {
 export const DAYS: DayOfWeek[] = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
 
 export const TIME_SLOTS = [
-  { num: 1, start: '08:30', end: '09:50' },
-  { num: 2, start: '10:00', end: '11:20' },
-  { num: 3, start: '11:30', end: '12:50' },
-  { num: 4, start: '13:20', end: '14:40' },
-  { num: 5, start: '14:50', end: '16:10' },
-  { num: 6, start: '16:20', end: '17:40' },
+  { num: 1, start: '08:00', end: '09:20', label: '1 пара' },
+  { num: 2, start: '09:30', end: '10:50', label: '2 пара' },
+  { num: 3, start: '11:00', end: '12:20', label: '3 пара' },
+  { num: 4, start: '12:30', end: '13:25', label: '4 пара' },
+  { num: 5, start: '13:40', end: '15:00', label: '5 пара (2 смена)' },
+  { num: 6, start: '15:10', end: '16:30', label: '6 пара (2 смена)' },
+  { num: 7, start: '16:40', end: '18:00', label: '7 пара (2 смена)' },
+  { num: 8, start: '18:10', end: '18:50', label: '8 пара (2 смена)' },
 ];
 
 export const LESSON_COLORS: Record<LessonType, string> = {
   LECTURE: 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800',
   PRACTICE: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800',
-  LAB: 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-800',
+  LAB: 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800',
   SEMINAR: 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300 border-orange-200 dark:border-orange-800',
   EXAM: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800',
 };
