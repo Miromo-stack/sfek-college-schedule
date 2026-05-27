@@ -10,6 +10,25 @@ const languages = [
   { code: 'en', label: 'English', flag: '🇬🇧' },
 ];
 
+const KK_WEEKDAYS = ['Жексенбі', 'Дүйсенбі', 'Сейсенбі', 'Сәрсенбі', 'Бейсенбі', 'Жұма', 'Сенбі'];
+const KK_MONTHS = ['Қаңтар', 'Ақпан', 'Наурыз', 'Сәуір', 'Мамыр', 'Маусым', 'Шілде', 'Тамыз', 'Қыркүйек', 'Қазан', 'Қараша', 'Желтоқсан'];
+const RU_WEEKDAYS = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+const RU_MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+function formatDate(date: Date, lang: string): string {
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  const weekday = date.getDay();
+  if (lang === 'kk') {
+    return `${KK_WEEKDAYS[weekday]}, ${day} ${KK_MONTHS[month]} ${year} ж.`;
+  }
+  if (lang === 'ru') {
+    return `${RU_WEEKDAYS[weekday]}, ${day} ${RU_MONTHS[month]} ${year} г.`;
+  }
+  return date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+}
+
 export default function Header() {
   const { t, i18n } = useTranslation();
   const { theme, toggleTheme } = useThemeStore();
@@ -43,12 +62,7 @@ export default function Header() {
             {t('common.welcome')}, {user?.firstName}!
           </h2>
           <p className="text-xs text-gray-500 dark:text-slate-400">
-            {new Date().toLocaleDateString(i18n.language === 'kk' ? 'kk-KZ' : i18n.language === 'en' ? 'en-US' : 'ru-RU', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
+            {formatDate(new Date(), i18n.language)}
           </p>
         </div>
 

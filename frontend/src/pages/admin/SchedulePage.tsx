@@ -11,6 +11,15 @@ import { useAuthStore } from '../../store/authStore';
 import { cn } from '../../utils/cn';
 import toast from 'react-hot-toast';
 
+function translateScheduleName(name: string, t: (key: string) => string): string {
+  const match = name.match(/^(.+?)\s*-\s*(\S+)\s+(\d{4})$/);
+  if (!match) return name;
+  const season = match[2].toLowerCase();
+  const year = match[3];
+  const seasonKey = season === 'весна' || season === 'spring' ? 'spring' : 'fall';
+  return `${t('schedule.mainSchedule')} - ${t(`schedule.${seasonKey}`)} ${year}`;
+}
+
 export default function SchedulePage() {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
@@ -382,7 +391,7 @@ export default function SchedulePage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('schedule.title')}</h1>
           <p className="text-sm text-gray-500 dark:text-slate-400 mt-0.5">
-            {selectedSchedule?.name}
+            {selectedSchedule ? translateScheduleName(selectedSchedule.name, t) : ''}
           </p>
         </div>
 
@@ -438,7 +447,7 @@ export default function SchedulePage() {
           className="input-field w-auto text-sm"
         >
           {schedules.map((s) => (
-            <option key={s.id} value={s.id}>{s.name}</option>
+            <option key={s.id} value={s.id}>{translateScheduleName(s.name, t)}</option>
           ))}
         </select>
 

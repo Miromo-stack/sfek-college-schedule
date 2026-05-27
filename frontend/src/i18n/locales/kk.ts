@@ -100,6 +100,9 @@ export default {
     lessonType: 'Сабақ түрі',
     published: 'Жарияланды',
     draft: 'Жоба',
+    mainSchedule: 'Негізгі кесте',
+    spring: 'Көктем',
+    fall: 'Күз',
   },
   days: {
     MONDAY: 'Дүйсенбі',

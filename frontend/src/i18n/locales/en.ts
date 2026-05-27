@@ -100,6 +100,9 @@ export default {
     lessonType: 'Lesson Type',
     published: 'Published',
     draft: 'Draft',
+    mainSchedule: 'Main Schedule',
+    spring: 'Spring',
+    fall: 'Fall',
   },
   days: {
     MONDAY: 'Monday',

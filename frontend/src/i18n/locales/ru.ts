@@ -100,6 +100,9 @@ export default {
     lessonType: 'Тип занятия',
     published: 'Опубликовано',
     draft: 'Черновик',
+    mainSchedule: 'Основное расписание',
+    spring: 'Весна',
+    fall: 'Осень',
   },
   days: {
     MONDAY: 'Понедельник',
