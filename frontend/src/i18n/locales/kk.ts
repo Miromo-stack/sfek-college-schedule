@@ -180,7 +180,7 @@ export default {
     contactUs: 'Бізбен байланысу',
     contactDesc: 'СФЭК колледжінің байланыс ақпараты',
     contactAddress: 'Мекенжай',
-    contactAddressValue: 'Қазақстан, Семей қ., Глинки көш., 20А',
+    contactAddressValue: 'Қазақстан, Семей қ., Қайым Мұхамедханов көш., 14',
     contactPhone: 'Телефон',
     contactPhoneValue: '+7 (7222) 56-28-28',
     contactEmail: 'Электрондық пошта',

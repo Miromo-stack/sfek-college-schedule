@@ -180,7 +180,7 @@ export default {
     contactUs: 'Связаться с нами',
     contactDesc: 'Контактная информация колледжа СФЭК',
     contactAddress: 'Адрес',
-    contactAddressValue: 'Казахстан, г. Семей, ул. Глинки, 20А',
+    contactAddressValue: 'Казахстан, г. Семей, ул. Кайыма Мухамедханова, 14',
     contactPhone: 'Телефон',
     contactPhoneValue: '+7 (7222) 56-28-28',
     contactEmail: 'Электронная почта',

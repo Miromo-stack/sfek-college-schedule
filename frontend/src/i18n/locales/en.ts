@@ -180,7 +180,7 @@ export default {
     contactUs: 'Contact Us',
     contactDesc: 'Contact information for SFEK College',
     contactAddress: 'Address',
-    contactAddressValue: 'Kazakhstan, Semey, Glinka St., 20A',
+    contactAddressValue: 'Kazakhstan, Semey, Kaiym Mukhamedkhanov St., 14',
     contactPhone: 'Phone',
     contactPhoneValue: '+7 (7222) 56-28-28',
     contactEmail: 'Email',
