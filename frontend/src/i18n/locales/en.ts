@@ -96,6 +96,8 @@ export default {
     noConflicts: 'No Conflicts',
     lessonNumber: 'Period',
     timeSlot: 'Time',
+    dayOfWeek: 'Day of Week',
+    lessonType: 'Lesson Type',
     published: 'Published',
     draft: 'Draft',
   },

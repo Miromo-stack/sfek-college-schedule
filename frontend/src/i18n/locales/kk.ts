@@ -96,6 +96,8 @@ export default {
     noConflicts: 'Қақтығыстар жоқ',
     lessonNumber: 'Пара',
     timeSlot: 'Уақыт',
+    dayOfWeek: 'Апта күні',
+    lessonType: 'Сабақ түрі',
     published: 'Жарияланды',
     draft: 'Жоба',
   },

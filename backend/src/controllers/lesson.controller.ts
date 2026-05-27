@@ -1,7 +1,8 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import prisma from '../utils/prisma';
 import { sendSuccess, sendError } from '../utils/response';
 import { DayOfWeek } from '@prisma/client';
+import { AuthRequest } from '../types';
 
 interface ConflictResult {
   type: 'teacher' | 'classroom' | 'group';
@@ -68,9 +69,19 @@ async function checkConflicts(
   return conflicts;
 }
 
-export async function createLesson(req: Request, res: Response): Promise<void> {
+export async function createLesson(req: AuthRequest, res: Response): Promise<void> {
   try {
     const data = req.body;
+
+    // Teachers can only create lessons assigned to themselves
+    if (req.user?.role === 'TEACHER') {
+      const teacher = await prisma.teacher.findUnique({ where: { userId: req.user.userId } });
+      if (!teacher) {
+        sendError(res, 'Teacher profile not found', 404);
+        return;
+      }
+      data.teacherId = teacher.id;
+    }
 
     const conflicts = await checkConflicts(
       data.teacherId,
@@ -107,18 +118,29 @@ export async function createLesson(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function updateLesson(req: Request, res: Response): Promise<void> {
+export async function updateLesson(req: AuthRequest, res: Response): Promise<void> {
   try {
     const { id } = req.params;
     const data = req.body;
 
-    if (data.teacherId || data.classroomId || data.groupId || data.dayOfWeek || data.lessonNumber) {
-      const existing = await prisma.lesson.findUnique({ where: { id } });
-      if (!existing) {
-        sendError(res, 'Lesson not found', 404);
+    const existing = await prisma.lesson.findUnique({ where: { id } });
+    if (!existing) {
+      sendError(res, 'Lesson not found', 404);
+      return;
+    }
+
+    // Teachers can only update their own lessons
+    if (req.user?.role === 'TEACHER') {
+      const teacher = await prisma.teacher.findUnique({ where: { userId: req.user.userId } });
+      if (!teacher || existing.teacherId !== teacher.id) {
+        sendError(res, 'You can only edit your own lessons', 403);
         return;
       }
+      // Teachers cannot change the teacher assignment
+      delete data.teacherId;
+    }
 
+    if (data.classroomId || data.groupId || data.dayOfWeek || data.lessonNumber) {
       const conflicts = await checkConflicts(
         data.teacherId || existing.teacherId,
         data.classroomId || existing.classroomId,
@@ -157,9 +179,21 @@ export async function updateLesson(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function deleteLesson(req: Request, res: Response): Promise<void> {
+export async function deleteLesson(req: AuthRequest, res: Response): Promise<void> {
   try {
-    await prisma.lesson.delete({ where: { id: req.params.id } });
+    const { id } = req.params;
+
+    // Teachers can only delete their own lessons
+    if (req.user?.role === 'TEACHER') {
+      const teacher = await prisma.teacher.findUnique({ where: { userId: req.user.userId } });
+      const lesson = await prisma.lesson.findUnique({ where: { id } });
+      if (!teacher || !lesson || lesson.teacherId !== teacher.id) {
+        sendError(res, 'You can only delete your own lessons', 403);
+        return;
+      }
+    }
+
+    await prisma.lesson.delete({ where: { id } });
     sendSuccess(res, null, 'Lesson deleted');
   } catch (error) {
     console.error('Delete lesson error:', error);
@@ -167,7 +201,7 @@ export async function deleteLesson(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function getLessons(req: Request, res: Response): Promise<void> {
+export async function getLessons(req: AuthRequest, res: Response): Promise<void> {
   try {
     const { scheduleId, dayOfWeek, teacherId, groupId, classroomId } = req.query;
 
@@ -196,7 +230,7 @@ export async function getLessons(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function checkLessonConflicts(req: Request, res: Response): Promise<void> {
+export async function checkLessonConflicts(req: AuthRequest, res: Response): Promise<void> {
   try {
     const { teacherId, classroomId, groupId, dayOfWeek, lessonNumber, scheduleId, excludeId } = req.body;
 

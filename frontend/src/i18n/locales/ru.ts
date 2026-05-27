@@ -96,6 +96,8 @@ export default {
     noConflicts: 'Конфликтов нет',
     lessonNumber: 'Пара',
     timeSlot: 'Время',
+    dayOfWeek: 'День недели',
+    lessonType: 'Тип занятия',
     published: 'Опубликовано',
     draft: 'Черновик',
   },
