@@ -45,8 +45,8 @@ export default function App() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-slate-900">
         <div className="text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center shadow-2xl shadow-primary-500/30 animate-pulse">
-            <span className="text-white font-bold text-2xl">S</span>
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center shadow-2xl shadow-primary-500/30 border-2 border-primary-200 dark:border-slate-600 animate-pulse">
+            <img src="/sfek-logo.webp" alt="SFEK" className="w-12 h-12 rounded-xl object-contain" />
           </div>
           <LoadingSpinner size="md" className="mt-4" />
         </div>

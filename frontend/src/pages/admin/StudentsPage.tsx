@@ -134,7 +134,7 @@ export default function StudentsPage() {
                     <td className="py-3 px-4 text-sm text-gray-500">{i + 1}</td>
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
                           <span className="text-white text-xs font-semibold">{student.user.firstName[0]}{student.user.lastName[0]}</span>
                         </div>
                         <span className="text-sm font-medium text-gray-900 dark:text-white">

@@ -107,7 +107,7 @@ export default function DashboardPage() {
   const statCards = [
     { icon: GraduationCap, label: t('dashboard.totalStudents'), value: stats?.overview.totalStudents || 0, color: 'from-blue-500 to-blue-600', shadow: 'shadow-blue-500/25' },
     { icon: Users, label: t('dashboard.totalTeachers'), value: stats?.overview.totalTeachers || 0, color: 'from-emerald-500 to-emerald-600', shadow: 'shadow-emerald-500/25' },
-    { icon: Layers, label: t('dashboard.totalGroups'), value: stats?.overview.totalGroups || 0, color: 'from-purple-500 to-purple-600', shadow: 'shadow-purple-500/25' },
+    { icon: Layers, label: t('dashboard.totalGroups'), value: stats?.overview.totalGroups || 0, color: 'from-indigo-500 to-indigo-600', shadow: 'shadow-indigo-500/25' },
     { icon: BookOpen, label: t('dashboard.totalSubjects'), value: stats?.overview.totalSubjects || 0, color: 'from-amber-500 to-amber-600', shadow: 'shadow-amber-500/25' },
     { icon: Building2, label: t('dashboard.totalClassrooms'), value: stats?.overview.totalClassrooms || 0, color: 'from-cyan-500 to-cyan-600', shadow: 'shadow-cyan-500/25' },
     { icon: Calendar, label: t('dashboard.totalLessons'), value: stats?.overview.totalLessons || 0, color: 'from-rose-500 to-rose-600', shadow: 'shadow-rose-500/25' },
@@ -240,7 +240,7 @@ export default function DashboardPage() {
           {[
             { icon: Calendar, label: t('schedule.createSchedule'), path: '/schedule', color: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' },
             { icon: Users, label: t('common.add') + ' ' + t('common.teachers').toLowerCase(), path: '/teachers', color: 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' },
-            { icon: GraduationCap, label: t('common.add') + ' ' + t('common.students').toLowerCase(), path: '/students', color: 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400' },
+            { icon: GraduationCap, label: t('common.add') + ' ' + t('common.students').toLowerCase(), path: '/students', color: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' },
             { icon: FileSpreadsheet, label: t('common.export') + ' ' + t('common.pdf'), path: '/schedule', color: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400' },
           ].map((action) => (
             <button

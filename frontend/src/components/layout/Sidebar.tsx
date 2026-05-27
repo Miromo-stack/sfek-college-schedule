@@ -51,8 +51,8 @@ export default function Sidebar() {
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className="flex items-center gap-3 px-4 py-5 border-b border-gray-200/50 dark:border-slate-700/30">
-        <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center shadow-lg shadow-primary-500/25">
-          <span className="text-white font-bold text-lg">S</span>
+        <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-white dark:bg-slate-800 flex items-center justify-center shadow-lg shadow-primary-500/25 border border-primary-200 dark:border-slate-600">
+          <img src="/sfek-logo.webp" alt="SFEK" className="w-8 h-8 rounded-lg object-contain" />
         </div>
         <AnimatePresence>
           {!collapsed && (

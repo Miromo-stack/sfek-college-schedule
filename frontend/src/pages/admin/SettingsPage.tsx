@@ -87,8 +87,8 @@ export default function SettingsPage() {
       {/* Appearance */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="card p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 rounded-xl bg-purple-100 dark:bg-purple-900/30">
-            <Palette className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+          <div className="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/30">
+            <Palette className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           </div>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('common.darkMode')}</h2>
         </div>

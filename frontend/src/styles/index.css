@@ -102,7 +102,7 @@
   }
 
   .badge-purple {
-    @apply bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400;
+    @apply bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-400;
   }
 
   .page-transition {
@@ -133,6 +133,6 @@
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-700;
   }
 }

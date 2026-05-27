@@ -24,7 +24,7 @@ const colorMap: Record<NotificationType, string> = {
   CANCELLATION: 'bg-red-100 dark:bg-red-900/30 text-red-600',
   ROOM_CHANGE: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600',
   GENERAL: 'bg-gray-100 dark:bg-gray-800 text-gray-600',
-  SYSTEM: 'bg-purple-100 dark:bg-purple-900/30 text-purple-600',
+  SYSTEM: 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600',
 };
 
 export default function NotificationsPage() {

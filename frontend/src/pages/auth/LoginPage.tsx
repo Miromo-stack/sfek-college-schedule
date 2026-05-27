@@ -79,9 +79,9 @@ export default function LoginPage() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', damping: 15, delay: 0.1 }}
-            className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center shadow-2xl shadow-primary-500/30"
+            className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center shadow-2xl shadow-primary-500/30 border-2 border-primary-200 dark:border-slate-600"
           >
-            <span className="text-white font-bold text-3xl">S</span>
+            <img src="/sfek-logo.webp" alt="SFEK" className="w-16 h-16 rounded-xl object-contain" />
           </motion.div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
             {t('common.appName')}
