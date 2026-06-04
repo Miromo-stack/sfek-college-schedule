@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: 255 255 255;
+    --color-surface: 249 250 251;
+    --color-surface-hover: 243 244 246;
+    --color-border: 229 231 235;
+    --color-text: 17 24 39;
+    --color-text-secondary: 107 114 128;
+    --color-primary: 59 130 246;
+  }
+
+  .dark {
+    --color-bg: 15 23 42;
+    --color-surface: 30 41 59;
+    --color-surface-hover: 51 65 85;
+    --color-border: 51 65 85;
+    --color-text: 248 250 252;
+    --color-text-secondary: 148 163 184;
+    --color-primary: 96 165 250;
+  }
+
+  body {
+    @apply bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 transition-colors duration-300;
+  }
+
+  * {
+    @apply border-gray-200 dark:border-slate-700;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-white/20 dark:border-slate-700/50;
+  }
+
+  .glass-card {
+    @apply bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg rounded-2xl border border-gray-200/50 dark:border-slate-700/50 shadow-lg shadow-gray-200/20 dark:shadow-black/20;
+  }
+
+  .glass-sidebar {
+    @apply bg-white/90 dark:bg-slate-900/95 backdrop-blur-2xl border-r border-gray-200/50 dark:border-slate-700/30;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl px-4 py-2.5 transition-all duration-200 shadow-lg shadow-primary-600/25 hover:shadow-xl hover:shadow-primary-600/30 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-700 dark:text-slate-200 font-medium rounded-xl px-4 py-2.5 transition-all duration-200 active:scale-[0.98];
+  }
+
+  .btn-danger {
+    @apply bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl px-4 py-2.5 transition-all duration-200 shadow-lg shadow-red-500/25 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-600 dark:text-slate-400 font-medium rounded-xl px-4 py-2.5 transition-all duration-200 active:scale-[0.98];
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .stat-card {
+    @apply bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-800/80 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5;
+  }
+
+  .table-row {
+    @apply hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors duration-150;
+  }
+
+  .skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-slate-700 rounded;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-blue {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400;
+  }
+
+  .badge-green {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400;
+  }
+
+  .badge-red {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400;
+  }
+
+  .badge-yellow {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400;
+  }
+
+  .badge-purple {
+    @apply bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-400;
+  }
+
+  .page-transition {
+    @apply animate-fade-in;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-slate-600 rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-slate-500;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-700;
+  }
+}

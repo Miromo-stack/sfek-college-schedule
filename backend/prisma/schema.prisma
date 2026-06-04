@@ -1,0 +1,306 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+enum LessonType {
+  LECTURE
+  PRACTICE
+  LAB
+  SEMINAR
+  EXAM
+}
+
+enum NotificationType {
+  SCHEDULE_CHANGE
+  NEW_SCHEDULE
+  CANCELLATION
+  ROOM_CHANGE
+  GENERAL
+  SYSTEM
+}
+
+enum SemesterStatus {
+  PLANNING
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  firstName     String
+  lastName      String
+  middleName    String?
+  role          Role           @default(STUDENT)
+  avatar        String?
+  phone         String?
+  isActive      Boolean        @default(true)
+  language      String         @default("ru")
+  theme         String         @default("light")
+  lastLoginAt   DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  teacher       Teacher?
+  student       Student?
+  notifications Notification[]
+  sentNotifications Notification[] @relation("SentNotifications")
+
+  @@map("users")
+}
+
+model Department {
+  id          String    @id @default(uuid())
+  name        String
+  nameKz      String?
+  nameEn      String?
+  code        String    @unique
+  description String?
+  headId      String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  teachers    Teacher[]
+  subjects    Subject[]
+  groups      Group[]
+
+  @@map("departments")
+}
+
+model Teacher {
+  id           String    @id @default(uuid())
+  userId       String    @unique
+  employeeId   String    @unique
+  departmentId String
+  position     String?
+  specialization String?
+  maxHoursPerWeek Int    @default(36)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  department   Department @relation(fields: [departmentId], references: [id])
+  lessons      Lesson[]
+  subjects     TeacherSubject[]
+
+  @@map("teachers")
+}
+
+model Student {
+  id          String    @id @default(uuid())
+  userId      String    @unique
+  studentId   String    @unique
+  groupId     String
+  enrollYear  Int
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group       Group     @relation(fields: [groupId], references: [id])
+  attendance  Attendance[]
+  favorites   FavoriteSubject[]
+
+  @@map("students")
+}
+
+model Group {
+  id           String    @id @default(uuid())
+  name         String    @unique
+  departmentId String
+  course       Int
+  maxStudents  Int       @default(30)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  department   Department @relation(fields: [departmentId], references: [id])
+  students     Student[]
+  lessons      Lesson[]
+
+  @@map("groups")
+}
+
+model Subject {
+  id           String    @id @default(uuid())
+  name         String
+  nameKz       String?
+  nameEn       String?
+  code         String    @unique
+  departmentId String
+  description  String?
+  creditHours  Int       @default(3)
+  color        String?
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  department   Department @relation(fields: [departmentId], references: [id])
+  lessons      Lesson[]
+  teachers     TeacherSubject[]
+  favorites    FavoriteSubject[]
+
+  @@map("subjects")
+}
+
+model TeacherSubject {
+  id         String  @id @default(uuid())
+  teacherId  String
+  subjectId  String
+
+  teacher    Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  subject    Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([teacherId, subjectId])
+  @@map("teacher_subjects")
+}
+
+model Classroom {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  building    String
+  floor       Int
+  capacity    Int
+  type        String    @default("LECTURE")
+  equipment   String[]
+  isAvailable Boolean   @default(true)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  lessons     Lesson[]
+
+  @@map("classrooms")
+}
+
+model Semester {
+  id          String         @id @default(uuid())
+  name        String
+  nameKz      String?
+  nameEn      String?
+  academicYear String
+  startDate   DateTime
+  endDate     DateTime
+  status      SemesterStatus @default(PLANNING)
+  isCurrent   Boolean        @default(false)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  schedules   Schedule[]
+
+  @@map("semesters")
+}
+
+model Schedule {
+  id          String    @id @default(uuid())
+  name        String
+  semesterId  String
+  isPublished Boolean   @default(false)
+  isActive    Boolean   @default(true)
+  createdBy   String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  semester    Semester  @relation(fields: [semesterId], references: [id])
+  lessons     Lesson[]
+
+  @@map("schedules")
+}
+
+model Lesson {
+  id           String     @id @default(uuid())
+  scheduleId   String
+  subjectId    String
+  teacherId    String
+  groupId      String
+  classroomId  String
+  dayOfWeek    DayOfWeek
+  startTime    String
+  endTime      String
+  lessonNumber Int
+  type         LessonType @default(LECTURE)
+  isRecurring  Boolean    @default(true)
+  specificDate DateTime?
+  notes        String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  schedule     Schedule   @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  subject      Subject    @relation(fields: [subjectId], references: [id])
+  teacher      Teacher    @relation(fields: [teacherId], references: [id])
+  group        Group      @relation(fields: [groupId], references: [id])
+  classroom    Classroom  @relation(fields: [classroomId], references: [id])
+  attendance   Attendance[]
+
+  @@map("lessons")
+}
+
+model Attendance {
+  id        String    @id @default(uuid())
+  lessonId  String
+  studentId String
+  date      DateTime
+  isPresent Boolean   @default(false)
+  note      String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  lesson    Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  student   Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, studentId, date])
+  @@map("attendance")
+}
+
+model Notification {
+  id         String           @id @default(uuid())
+  userId     String
+  senderId   String?
+  type       NotificationType @default(GENERAL)
+  title      String
+  message    String
+  isRead     Boolean          @default(false)
+  metadata   Json?
+  createdAt  DateTime         @default(now())
+
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sender     User?            @relation("SentNotifications", fields: [senderId], references: [id])
+
+  @@map("notifications")
+}
+
+model FavoriteSubject {
+  id        String  @id @default(uuid())
+  studentId String
+  subjectId String
+
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, subjectId])
+  @@map("favorite_subjects")
+}
